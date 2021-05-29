@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% comment %} {% for wish in wishes %} {% endcomment %}
+    {% if item_list|length == 0 %}
+      <h3>No Wish Items Exist</h3>
+      <hr>
+      <a class="pure-button" href="{% url 'add' %}">Add Wish Item</a>
+{% else %}
+    <h3>Something does exist</h3> 
+{% endif %} 
+ {% endblock %} 
