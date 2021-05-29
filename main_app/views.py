@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView
 from .models import Item
 from .forms import ItemForm
 # Create your views here.
@@ -16,11 +16,18 @@ class ItemCreate(CreateView):
     success_url = '/'
 
 
-# def add_item(request):
-#  if request.method == 'POST':
-#      form = ItemForm(request.POST)
-#      if form.is_valid():
-#          return HttpResponseRedirect('/')
-#      else:
-#         form = ItemForm()
-#         return render(request, 'add.html', {'form': form})
+def items_detail(request, item_id):
+    item = Item.objects.get(id=item_id)
+    return render(request, 'index.html', {'item' : item })
+    
+
+class ItemDelete(DeleteView):
+  model = Item
+  success_url = '/'
+
+def showform(request):
+    form = ItemForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        context = {'form': form }
+    return render(request, 'index.html', context)
