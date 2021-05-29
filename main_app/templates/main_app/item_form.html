@@ -2,8 +2,8 @@
 {% block content %}
 <hr>
     <form  class="pure-form" action="" method="POST">
-        {% csrf_token %}
         <table>
+            {% csrf_token %}
             {{ form.as_p }}
         </table>
         <input type="submit" value="Add Item" class="pure-button">

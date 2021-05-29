@@ -1,11 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-  {% comment %} {% for wish in wishes %} {% endcomment %}
     {% if item_list|length == 0 %}
       <h3>No Wish Items Exist</h3>
       <hr>
       <a class="pure-button" href="{% url 'add' %}">Add Wish Item</a>
-{% else %}
-    <h3>Something does exist</h3> 
-{% endif %} 
- {% endblock %} 
+    {% else %}
+     <table class="pure-table pure-table-bordered">
+      <thead>
+        <tr>
+            <th>Wish</th>
+            <th>Delete</th>
+        </tr>
+      </thead>
+       <tbody>
+        <tr>
+            {% for item in items %}
+            <td>{{item.description}}</td>
+            <td>X</td>
+            {% endfor %} 
+        </tr>
+      </tbody>
+    </table>
+  {% endif %} 
+{% endblock %} 
